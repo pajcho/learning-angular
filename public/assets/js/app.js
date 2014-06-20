@@ -96,9 +96,13 @@ app.controller('DashboardController', function($scope, $location, FlashService){
 });
 
 app.controller('MembersController', function($scope, $location, FlashService, Members){
-    $scope.members = Members.data.data;
+    $scope.members = {};
+    $scope.members.data = Members.data.data;
+    $scope.members.pagination = Members.data.meta.pagination;
 });
 
 app.controller('GroupsController', function($scope, $location, FlashService, Groups){
-    $scope.groups = Groups.data.data;
+    $scope.groups = {};
+    $scope.groups.data = Groups.data.data;
+    $scope.groups.pagination = Groups.data.meta.pagination;
 });

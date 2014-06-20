@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="group in groups">
+        <tr ng-repeat="group in groups.data">
             <td width="20">{{ group.id }}</td>
             <td>{{ group.name }}</td>
             <td>{{ group.location }}</td>
@@ -19,7 +19,7 @@
                 <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
             </td>
         </tr>
-        <tr ng-if="!groups">
+        <tr ng-if="!groups.data">
             <td colspan="4" align="center">
                 There are no available groups to display! <br/>
                 But you can always create one. <br/>
@@ -31,3 +31,6 @@
         </tr>
     </tbody>
 </table>
+
+<p>Showing {{(groups.pagination.current_page * groups.pagination.count) - groups.pagination.count + 1}} - {{groups.pagination.current_page * groups.pagination.count}} of total {{groups.pagination.total}} groups</p>
+
