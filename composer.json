@@ -4,7 +4,12 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+        "way/generators": "dev-master",
+        "fzaninotto/faker": "1.4.*",
+        "anahkiasen/former": "dev-develop",
+        "dingo/api": "0.*",
+        "barryvdh/laravel-cors": "0.2.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -14,7 +19,11 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+        "psr-4": {
+            "App\\": "app/App/",
+            "Api\\": "app/Api/"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [

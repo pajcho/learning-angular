@@ -1,0 +1,33 @@
+<h1 class="page-header">Groups</h1>
+
+<table class="table table-bordered table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="group in groups">
+            <td width="20">{{ group.id }}</td>
+            <td>{{ group.name }}</td>
+            <td>{{ group.location }}</td>
+            <td width="80">
+                <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></button>
+                <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+            </td>
+        </tr>
+        <tr ng-if="!groups">
+            <td colspan="4" align="center">
+                There are no available groups to display! <br/>
+                But you can always create one. <br/>
+                <a href="#/members/groups/create" class="btn btn-xs btn-info">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Create Group
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

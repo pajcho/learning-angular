@@ -1,0 +1,48 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+}
+
+a:focus { outline: none; }
+
+/*
+ * Global add-ons
+ */
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+/* Reposition alert messages while logged in */
+/* .main .alert-message {
+    display: block;
+    position: fixed;
+    top: 57px;
+    right: 38px;
+    z-index: 100;
+} */
+
+.main .alert-message h4 {
+    display: inline;
+}
+
+.bold {
+    font-weight: bold;
+}

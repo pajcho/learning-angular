@@ -4,8 +4,192 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8c9bc04a5706bf54f2a6d2e62168e90",
+    "hash": "791b5a6bcd605c0c756f932c5cee66c2",
     "packages": [
+        {
+            "name": "anahkiasen/former",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Anahkiasen/former.git",
+                "reference": "cc4ef0105d1750ee83aeaf85d8fcbe2b54324de7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Anahkiasen/former/zipball/cc4ef0105d1750ee83aeaf85d8fcbe2b54324de7",
+                "reference": "cc4ef0105d1750ee83aeaf85d8fcbe2b54324de7",
+                "shasum": ""
+            },
+            "require": {
+                "anahkiasen/html-object": "~1.4",
+                "illuminate/config": "~4.0",
+                "illuminate/container": "~4.0",
+                "illuminate/http": "~4.0",
+                "illuminate/routing": "~4.0",
+                "illuminate/session": "~4.0",
+                "illuminate/translation": "~4.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~4.0",
+                "mockery/mockery": "~0.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Former": "src",
+                    "Laravel": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Fabre",
+                    "email": "ehtnam6@gmail.com"
+                }
+            ],
+            "description": "A powerful form builder",
+            "homepage": "http://anahkiasen.github.com/former/",
+            "keywords": [
+                "bootstrap",
+                "form",
+                "foundation",
+                "laravel"
+            ],
+            "time": "2014-06-20 07:03:28"
+        },
+        {
+            "name": "anahkiasen/html-object",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Anahkiasen/html-object.git",
+                "reference": "776aff25a4db27964d95b2332e2f379b0aac9ff0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Anahkiasen/html-object/zipball/776aff25a4db27964d95b2332e2f379b0aac9ff0",
+                "reference": "776aff25a4db27964d95b2332e2f379b0aac9ff0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HtmlObject": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anahkiasen",
+                    "email": "ehtnam6@gmail.com"
+                }
+            ],
+            "description": "A set of classes to create and manipulate HTML objects abstractions",
+            "time": "2014-01-27 22:41:20"
+        },
+        {
+            "name": "asm89/stack-cors",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asm89/stack-cors.git",
+                "reference": "60bb51fbd65e0209de46f373cd5392308bb92045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asm89/stack-cors/zipball/60bb51fbd65e0209de46f373cd5392308bb92045",
+                "reference": "60bb51fbd65e0209de46f373cd5392308bb92045",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Asm89\\Stack": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com",
+                    "homepage": "http://asm89.github.io/"
+                }
+            ],
+            "description": "Cross-origin resource sharing library and stack middleware",
+            "homepage": "https://github.com/asm89/stack-cors",
+            "keywords": [
+                "cors",
+                "stack"
+            ],
+            "time": "2014-01-22 10:40:42"
+        },
+        {
+            "name": "barryvdh/laravel-cors",
+            "version": "v0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-cors.git",
+                "reference": "ce25db72385c135b74cdaf061dbd444957c363d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-cors/zipball/ce25db72385c135b74cdaf061dbd444957c363d2",
+                "reference": "ce25db72385c135b74cdaf061dbd444957c363d2",
+                "shasum": ""
+            },
+            "require": {
+                "asm89/stack-cors": "0.2.x",
+                "illuminate/support": "~4.1",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Cors\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application",
+            "keywords": [
+                "api",
+                "cors",
+                "crossdomain",
+                "laravel"
+            ],
+            "time": "2014-05-30 18:49:44"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.2",
@@ -88,6 +272,72 @@
             "time": "2014-01-17 12:21:18"
         },
         {
+            "name": "dingo/api",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dingo/api.git",
+                "reference": "65b453c119b0a0a34348b1a54ae4c0e0c72d28aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dingo/api/zipball/65b453c119b0a0a34348b1a54ae4c0e0c72d28aa",
+                "reference": "65b453c119b0a0a34348b1a54ae4c0e0c72d28aa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.1",
+                "league/fractal": "0.8.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "dingo/oauth2-server-laravel": "0.2.*",
+                "illuminate/auth": "~4.1",
+                "illuminate/database": "~4.1",
+                "illuminate/events": "~4.1",
+                "illuminate/pagination": "~4.1",
+                "illuminate/routing": "~4.1",
+                "lucadegasperi/oauth2-server-laravel": "1.0.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dingo/oauth2-server-laravel": "Use the Dingo OAuth 2.0 server to protect your API.",
+                "lucadegasperi/oauth2-server-laravel": "Use the League OAuth 2.0 server to protect your API."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dingo\\Api\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jason Lewis",
+                    "email": "jason.lewis1991@gmail.com",
+                    "homepage": "http://jasonlewis.me",
+                    "role": "Creator"
+                }
+            ],
+            "description": "A RESTful API package for the Laravel framework.",
+            "keywords": [
+                "api",
+                "dingo",
+                "laravel",
+                "restful"
+            ],
+            "time": "2014-05-28 10:30:29"
+        },
+        {
             "name": "filp/whoops",
             "version": "1.1.1",
             "source": {
@@ -144,6 +394,56 @@
                 "zf2"
             ],
             "time": "2014-05-13 05:05:11"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/010c7efedd88bf31141a02719f51fb44c732d5a0",
+                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": [
+
+                ]
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2014-06-04 14:43:02"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -348,6 +648,65 @@
                 "laravel"
             ],
             "time": "2014-06-18 05:07:22"
+        },
+        {
+            "name": "league/fractal",
+            "version": "0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "9985eee7efc42ef472da07856cdd3fd29c57642c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/9985eee7efc42ef472da07856cdd3fd29c57642c",
+                "reference": "9985eee7efc42ef472da07856cdd3fd29c57642c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "illuminate/pagination": "~4.1",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "email@philsturgeon.co.uk",
+                    "homepage": "http://philsturgeon.co.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for JSON output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "time": "2014-06-14 11:11:41"
         },
         {
             "name": "monolog/monolog",
@@ -1643,6 +2002,54 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-05-22 13:47:45"
+        },
+        {
+            "name": "way/generators",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JeffreyWay/Laravel-4-Generators.git",
+                "reference": "3d631c483849005005620a117624c39ad611a5d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/3d631c483849005005620a117624c39ad611a5d4",
+                "reference": "3d631c483849005005620a117624c39ad611a5d4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5.1",
+                "behat/mink": "~1.5.0",
+                "behat/mink-extension": "~1.2.0",
+                "behat/mink-goutte-driver": "~1.0.9",
+                "behat/mink-selenium2-driver": "~1.1.1",
+                "phpspec/phpspec": "~2.0",
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Way\\Generators": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@jeffrey-way.com",
+                    "homepage": "http://jeffrye-way.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Rapidly generate resources, migrations, models, and much more.",
+            "time": "2014-06-02 14:21:07"
         }
     ],
     "packages-dev": [
@@ -1652,9 +2059,10 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "way/generators": 20,
+        "anahkiasen/former": 20
+    },
     "platform": [
 
     ],

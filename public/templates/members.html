@@ -1,0 +1,36 @@
+<h1 class="page-header">Members</h1>
+
+<table class="table table-bordered table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="member in members" ng-class="{warning: !member.active}">
+            <td width="20">{{ member.id }}</td>
+            <td>{{ member.full_name }}</td>
+            <td>
+                <i class="glyphicon glyphicon-{{ member.active ? 'ok' : 'remove' }}"></i>
+                {{ member.active ? 'Active' : 'Inactive' }}
+            </td>
+            <td width="80">
+                <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></button>
+                <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+            </td>
+        </tr>
+        <tr ng-if="!members">
+            <td colspan="4" align="center">
+                There are no available members to display! <br/>
+                But you can always create one. <br/>
+                <a href="#/members/create" class="btn btn-sm btn-info">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Create Member
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
