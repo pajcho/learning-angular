@@ -1,52 +1,60 @@
-<h1 class="page-header">Members</h1>
-
-<table class="table table-bordered table-condensed table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="member in members.data" ng-class="{warning: !member.active}">
-            <td width="20">{{ member.id }}</td>
-            <td>{{ member.full_name }}</td>
-            <td>{{ member.phone }}</td>
-            <td>
-                <i class="glyphicon glyphicon-{{ member.active ? 'ok' : 'remove' }}"></i>
-                {{ member.active ? 'Active' : 'Inactive' }}
-            </td>
-            <td width="80">
-                <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></button>
-                <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-            </td>
-        </tr>
-        <tr ng-if="!members.data">
-            <td colspan="5" align="center">
-                There are no available members to display! <br/>
-                But you can always create one. <br/>
-                <a href="#/members/create" class="btn btn-sm btn-info">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    Create Member
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="row" ng-if="members.pagination">
-    <div class="col-md-6">
-        <p>Showing {{(members.pagination.current_page * members.pagination.count) - members.pagination.count + 1}} - {{members.pagination.current_page * members.pagination.count}} of total {{members.pagination.total}} members</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Members</h3>
     </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="member in members.data" ng-class="{warning: !member.active}">
+                    <td width="20">{{ member.id }}</td>
+                    <td>{{ member.full_name }}</td>
+                    <td>{{ member.phone }}</td>
+                    <td>
+                        <i class="fa fa-circle" style="color: {{ member.active ? '#47A447' : '#ED9C28' }};"></i>
+                        {{ member.active ? 'Active' : 'Inactive' }}
+                    </td>
+                    <td width="80">
+                        <button class="btn btn-xs btn-info"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+                <tr ng-if="!members.data">
+                    <td colspan="5" align="center">
+                        There are no available members to display! <br/>
+                        But you can always create one. <br/>
+                        <a href="#/members/create" class="btn btn-sm btn-info">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Create Member
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <div class="row" ng-if="members.pagination">
+            <div class="col-md-6">
+                <p>Showing {{(members.pagination.current_page * members.pagination.count) - members.pagination.count + 1}} - {{members.pagination.current_page * members.pagination.count}} of total {{members.pagination.total}} members</p>
+            </div>
 
-    <div class="col-md-6">
-        <div class="pull-right">
-            <pagination ng-change="$location.search('page', members.pagination.current_page)" total-items="members.pagination.total" items-per-page="members.pagination.per_page" ng-model="members.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="members.pagination.total_pages"></pagination>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <pagination ng-change="$location.search('page', members.pagination.current_page)" total-items="members.pagination.total" items-per-page="members.pagination.per_page" ng-model="members.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="members.pagination.total_pages"></pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 

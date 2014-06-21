@@ -1,45 +1,51 @@
-<h1 class="page-header">Groups</h1>
-
-<table class="table table-bordered table-condensed table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="group in groups.data">
-            <td width="20">{{ group.id }}</td>
-            <td>{{ group.name }}</td>
-            <td>{{ group.location }}</td>
-            <td width="80">
-                <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></button>
-                <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-            </td>
-        </tr>
-        <tr ng-if="!groups.data">
-            <td colspan="4" align="center">
-                There are no available groups to display! <br/>
-                But you can always create one. <br/>
-                <a href="#/members/groups/create" class="btn btn-xs btn-info">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    Create Group
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="row" ng-if="groups.pagination">
-    <div class="col-md-6">
-        <p>Showing {{(groups.pagination.current_page * groups.pagination.count) - groups.pagination.count + 1}} - {{groups.pagination.current_page * groups.pagination.count}} of total {{groups.pagination.total}} groups</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Groups</h3>
     </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="group in groups.data">
+                    <td width="20">{{ group.id }}</td>
+                    <td>{{ group.name }}</td>
+                    <td>{{ group.location }}</td>
+                    <td width="80">
+                        <button class="btn btn-xs btn-info"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+                <tr ng-if="!groups.data">
+                    <td colspan="4" align="center">
+                        There are no available groups to display! <br/>
+                        But you can always create one. <br/>
+                        <a href="#/members/groups/create" class="btn btn-xs btn-info">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Create Group
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <div class="row" ng-if="groups.pagination">
+            <div class="col-md-6">
+                <p>Showing {{(groups.pagination.current_page * groups.pagination.count) - groups.pagination.count + 1}} - {{groups.pagination.current_page * groups.pagination.count}} of total {{groups.pagination.total}} groups</p>
+            </div>
 
-    <div class="col-md-6" ng-if="groups.pagination.total_pages>1">
-        <div class="pull-right">
-            <pagination ng-change="$location.search('page', groups.pagination.current_page)" total-items="groups.pagination.total" items-per-page="groups.pagination.per_page" ng-model="groups.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="true" num-pages="groups.pagination.total_pages"></pagination>
+            <div class="col-md-6" ng-if="groups.pagination.total_pages>1">
+                <div class="pull-right">
+                    <pagination ng-change="$location.search('page', groups.pagination.current_page)" total-items="groups.pagination.total" items-per-page="groups.pagination.per_page" ng-model="groups.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="true" num-pages="groups.pagination.total_pages"></pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

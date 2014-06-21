@@ -2,7 +2,7 @@
 <html lang="en" ng-app="app" data-ng-controller="AppController">
     <head>
         <base href="/">
-        
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,7 @@
         
         <!-- BEGIN THEME STYLES -->
         <link href="<?php echo asset('assets/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo asset('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
         <link href="<?php echo asset('assets/css/loading-bar.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo asset('assets/css/main.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
@@ -48,10 +49,10 @@
                     <ul class="nav navbar-nav">
 
                         <li ng-class="{active: isActive('/members')}">
-                            <a href="#/members"><i class="glyphicon glyphicon-user"></i> Members</a>
+                            <a href="#/members"><i class="fa fa-user"></i> Members</a>
                         </li>
                         <li ng-class="{active: isActive('/members/groups')}">
-                            <a href="#/members/groups"><i class="glyphicon glyphicon-user"></i> Groups</a>
+                            <a href="#/members/groups"><i class="fa fa-users"></i> Groups</a>
                         </li>
 
                     </ul>
