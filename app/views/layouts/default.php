@@ -81,6 +81,7 @@
         <script src="<?php echo asset('assets/js/angular-route.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-animate.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/loading-bar.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/ui.bootstrap/pagination.js') ?>" type="text/javascript"></script>
 
         <!-- Custom project scripts -->
         <script src="<?php echo asset('assets/js/main.js') ?>" type="text/javascript"></script>

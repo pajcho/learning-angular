@@ -32,5 +32,14 @@
     </tbody>
 </table>
 
-<p>Showing {{(groups.pagination.current_page * groups.pagination.count) - groups.pagination.count + 1}} - {{groups.pagination.current_page * groups.pagination.count}} of total {{groups.pagination.total}} groups</p>
+<div class="row" ng-if="groups.pagination">
+    <div class="col-md-6">
+        <p>Showing {{(groups.pagination.current_page * groups.pagination.count) - groups.pagination.count + 1}} - {{groups.pagination.current_page * groups.pagination.count}} of total {{groups.pagination.total}} groups</p>
+    </div>
 
+    <div class="col-md-6" ng-if="groups.pagination.total_pages>1">
+        <div class="pull-right">
+            <pagination ng-change="$location.search('page', groups.pagination.current_page)" total-items="groups.pagination.total" items-per-page="groups.pagination.per_page" ng-model="groups.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="true" num-pages="groups.pagination.total_pages"></pagination>
+        </div>
+    </div>
+</div>

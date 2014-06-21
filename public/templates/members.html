@@ -25,7 +25,7 @@
             </td>
         </tr>
         <tr ng-if="!members.data">
-            <td colspan="4" align="center">
+            <td colspan="5" align="center">
                 There are no available members to display! <br/>
                 But you can always create one. <br/>
                 <a href="#/members/create" class="btn btn-sm btn-info">
@@ -37,5 +37,16 @@
     </tbody>
 </table>
 
-<p>Showing {{(members.pagination.current_page * members.pagination.count) - members.pagination.count + 1}} - {{members.pagination.current_page * members.pagination.count}} of total {{members.pagination.total}} members</p>
+<div class="row" ng-if="members.pagination">
+    <div class="col-md-6">
+        <p>Showing {{(members.pagination.current_page * members.pagination.count) - members.pagination.count + 1}} - {{members.pagination.current_page * members.pagination.count}} of total {{members.pagination.total}} members</p>
+    </div>
+
+    <div class="col-md-6">
+        <div class="pull-right">
+            <pagination ng-change="$location.search('page', members.pagination.current_page)" total-items="members.pagination.total" items-per-page="members.pagination.per_page" ng-model="members.pagination.current_page" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="members.pagination.total_pages"></pagination>
+        </div>
+    </div>
+</div>
+
 

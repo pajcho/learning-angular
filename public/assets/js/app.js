@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'angular-loading-bar', 'ngAnimate']);
+var app = angular.module('app', ['ngRoute', 'angular-loading-bar', 'ngAnimate', 'ui.bootstrap.pagination']);
 
 app.config(function($routeProvider){
     $routeProvider.when('/', {
@@ -10,8 +10,10 @@ app.config(function($routeProvider){
         templateUrl: '../../templates/members.html',
         controller: 'MembersController',
         resolve: {
-            Members : function(MembersService) {
-                return MembersService.get();
+            Members : function(MembersService, $route) {
+                return MembersService.get({
+                    page: $route.current.params.page || 1
+                });
             }
         }
     });
@@ -20,10 +22,16 @@ app.config(function($routeProvider){
         templateUrl: '../../templates/groups.html',
         controller: 'GroupsController',
         resolve: {
-            Groups : function(GroupsService) {
-                return GroupsService.get();
+            Groups : function(GroupsService, $route) {
+                return GroupsService.get({
+                    page: $route.current.params.page || 1
+                });
             }
         }
+    });
+
+    $routeProvider.otherwise({
+        redirectTo: '/'
     });
 });
 
@@ -33,18 +41,31 @@ app.filter('to_trusted', ['$sce', function($sce){
     };
 }]);
 
+app.filter('range', function() {
+    return function(input, total) {
+        total = parseInt(total);
+        for (var i=0; i<total; i++)
+            input.push(i);
+        return input;
+    };
+});
+
 app.factory("MembersService", function($http) {
     return {
-        get: function(){
-            return $http.get('/api/members');
+        get: function(params){
+            return $http.get('/api/members', {
+                params: params
+            });
         }
     }
 });
 
 app.factory("GroupsService", function($http) {
     return {
-        get: function(){
-            return $http.get('/api/members/groups');
+        get: function(params){
+            return $http.get('/api/members/groups', {
+                params: params
+            });
         }
     }
 });
@@ -85,7 +106,9 @@ app.factory("FlashService", function($rootScope) {
     }
 });
 
-app.controller('AppController', function($scope, $location, FlashService){
+app.controller('AppController', function($scope, $location, $routeParams){
+    $scope.$location = $location;
+    $scope.$routeParams = $routeParams;
     $scope.isActive = function(checkRoute){
         return $location.path() === checkRoute;
     };
@@ -95,14 +118,18 @@ app.controller('DashboardController', function($scope, $location, FlashService){
 
 });
 
-app.controller('MembersController', function($scope, $location, FlashService, Members){
+app.controller('MembersController', function($scope, $location, $routeParams, FlashService, Members){
     $scope.members = {};
-    $scope.members.data = Members.data.data;
-    $scope.members.pagination = Members.data.meta.pagination;
+    if(!$.isEmptyObject(Members.data.data))
+        $scope.members.data = Members.data.data;
+    if(Members.data.meta)
+        $scope.members.pagination = Members.data.meta.pagination;
 });
 
 app.controller('GroupsController', function($scope, $location, FlashService, Groups){
     $scope.groups = {};
-    $scope.groups.data = Groups.data.data;
-    $scope.groups.pagination = Groups.data.meta.pagination;
+    if(!$.isEmptyObject(Groups.data.data))
+        $scope.groups.data = Groups.data.data;
+    if(Groups.data.meta)
+        $scope.groups.pagination = Groups.data.meta.pagination;
 });
