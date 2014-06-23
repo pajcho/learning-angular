@@ -24,6 +24,18 @@ app.config(function($routeProvider, $locationProvider){
         controller: 'DashboardController'
     });
 
+    $routeProvider.when('/members/groups', {
+        templateUrl: '../../templates/groups.html',
+        controller: 'GroupsController',
+        resolve: {
+            groups : function(GroupsService, $route) {
+                return GroupsService.get({
+                    page: $route.current.params.page || 1
+                });
+            }
+        }
+    });
+
     $routeProvider.when('/members/:id?/:edit?', {
         templateUrl: '../../templates/members.html',
         controller: 'MembersController',
@@ -38,18 +50,6 @@ app.config(function($routeProvider, $locationProvider){
                     return MembersService.getOne($route.current.params.id);
 
                 return null;
-            }
-        }
-    });
-
-    $routeProvider.when('/members/groups', {
-        templateUrl: '../../templates/groups.html',
-        controller: 'GroupsController',
-        resolve: {
-            groups : function(GroupsService, $route) {
-                return GroupsService.get({
-                    page: $route.current.params.page || 1
-                });
             }
         }
     });
