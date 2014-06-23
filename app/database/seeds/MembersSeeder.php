@@ -27,6 +27,7 @@ class MembersSeeder extends Seeder {
                 'dos' => $faker->optional(0.7)->dateTimeBetween($startDate = '-2 years', $endDate = '-10 days'),
                 'doc' => $faker->optional(0.7)->dateTimeBetween($startDate = '-6 months', $endDate = '-15 days'),
                 'active' => $faker->randomElement(array(1, 1, 1, 1, 1, 0, 0)),
+                'freeOfCharge' => $faker->randomElement(array(1, 1, 0, 0, 0, 0, 0)),
                 'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-10 days'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-10 days'),
             ));

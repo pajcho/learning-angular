@@ -66,7 +66,7 @@
                 <div class="col-md-10 col-md-offset-1 main">
                     <div class="hidden" id="flash-messages">
                         <div ng-repeat="message in flash" class="alert alert-dismissable alert-message {{ message.alertClass }}">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="message.remove($index)">&times;</button>
                             <h4 ng-bind-html="message.heading | to_trusted"></h4>
                             <span>{{ message.message }}</span>
                         </div>
@@ -84,7 +84,7 @@
         <script src="<?php echo asset('assets/js/angular-route.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-animate.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/loading-bar.js') ?>" type="text/javascript"></script>
-        <script src="<?php echo asset('assets/js/ui.bootstrap/pagination.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/ui.bootstrap/ui-bootstrap-tpls-0.11.0.min.js') ?>" type="text/javascript"></script>
 
         <!-- Custom project scripts -->
         <script src="<?php echo asset('assets/js/main.js') ?>" type="text/javascript"></script>

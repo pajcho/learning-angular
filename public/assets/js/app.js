@@ -1,4 +1,19 @@
-var app = angular.module('app', ['ngRoute', 'angular-loading-bar', 'ngAnimate', 'ui.bootstrap.pagination']);
+/**
+ * Custom UI Bootstrap templates
+ */
+angular.module("template/pagination/pagination.html", []).run(["$templateCache", function($templateCache) {
+    $templateCache.put("template/pagination/pagination.html",
+       "<div class=\"btn-group\">" +
+            "<button class=\"btn btn-sm btn-default\" ng-if=\"boundaryLinks\" ng-class=\"{disabled: noPrevious()}\" ng-click=\"selectPage(1)\">{{getText('first')}}</button>" +
+            "<button class=\"btn btn-sm btn-default\" ng-if=\"directionLinks\" ng-class=\"{disabled: noPrevious()}\" ng-click=\"selectPage(page - 1)\">{{getText('previous')}}</button>" +
+            "<button class=\"btn btn-sm btn-default\" ng-repeat=\"page in pages track by $index\" ng-class=\"{active: page.active}\" ng-click=\"selectPage(page.number)\">{{page.text}}</button>" +
+            "<button class=\"btn btn-sm btn-default\" ng-if=\"directionLinks\" ng-class=\"{disabled: noNext()}\" ng-click=\"selectPage(page + 1)\">{{getText('next')}}</button>" +
+            "<button class=\"btn btn-sm btn-default\" ng-if=\"boundaryLinks\" ng-class=\"{disabled: noNext()}\" ng-click=\"selectPage(totalPages)\">{{getText('last')}}</button>" +
+        "</div>"
+    );
+}]);
+
+var app = angular.module('app', ['angular-loading-bar', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
 
 app.config(function($routeProvider, $locationProvider){
 
@@ -9,14 +24,20 @@ app.config(function($routeProvider, $locationProvider){
         controller: 'DashboardController'
     });
 
-    $routeProvider.when('/members', {
+    $routeProvider.when('/members/:id?/:edit?', {
         templateUrl: '../../templates/members.html',
         controller: 'MembersController',
         resolve: {
-            Members : function(MembersService, $route) {
+            members : function(MembersService, $route) {
                 return MembersService.get({
                     page: $route.current.params.page || 1
                 });
+            },
+            member : function(MembersService, $route) {
+                if(!isNaN($route.current.params.id) && $route.current.params.edit == 'edit')
+                    return MembersService.getOne($route.current.params.id);
+
+                return null;
             }
         }
     });
@@ -25,7 +46,7 @@ app.config(function($routeProvider, $locationProvider){
         templateUrl: '../../templates/groups.html',
         controller: 'GroupsController',
         resolve: {
-            Groups : function(GroupsService, $route) {
+            groups : function(GroupsService, $route) {
                 return GroupsService.get({
                     page: $route.current.params.page || 1
                 });
@@ -36,6 +57,41 @@ app.config(function($routeProvider, $locationProvider){
     $routeProvider.otherwise({
         redirectTo: '/'
     });
+});
+
+
+app.factory("MembersService", function($http, FlashService, $location) {
+    return {
+        get: function(params){
+            return $http.get('/api/members', {
+                params: params
+            });
+        },
+        getOne: function(id, params){
+            return $http.get('/api/members/' + id, {
+                params: params
+            }).error(function(error){
+                FlashService.set(error.message, 'error');
+                $location.path('/members', $location.search());
+            });
+        },
+        edit: function(id, params){
+            return $http.put('/api/members/' + id, params).error(function(error){
+                FlashService.set(error.message, 'error');
+                $location.path('/members', $location.search());
+            });
+        }
+    }
+});
+
+app.factory("GroupsService", function($http) {
+    return {
+        get: function(params){
+            return $http.get('/api/members/groups', {
+                params: params
+            });
+        }
+    }
 });
 
 app.filter('to_trusted', ['$sce', function($sce){
@@ -53,55 +109,37 @@ app.filter('range', function() {
     };
 });
 
-app.factory("MembersService", function($http) {
-    return {
-        get: function(params){
-            return $http.get('/api/members', {
-                params: params
-            });
-        }
-    }
-});
-
-app.factory("GroupsService", function($http) {
-    return {
-        get: function(params){
-            return $http.get('/api/members/groups', {
-                params: params
-            });
-        }
-    }
-});
-
 app.factory("FlashService", function($rootScope) {
-    return {
+    return $rootScope.FlashService = {
         set: function(message, type) {
             if(typeof $rootScope.flash === 'undefined') $rootScope.flash = [];
             angular.element("#flash-messages").removeClass('hidden');
 
+            var messageObject = $rootScope.flash.push({
+                remove: function(index){
+                    return $rootScope.FlashService.remove(index);
+                }
+            });
+            messageObject = $rootScope.flash[messageObject-1];
+
             switch(type)
             {
                 case 'error':
-                    $rootScope.flash.push({message: message, type: 'error', alertClass: 'alert-danger', heading: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error'});
+                    angular.extend(messageObject, {message: message, type: 'error', alertClass: 'alert-danger', heading: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error'});
                     break;
                 case 'success':
-                    $rootScope.flash.push({message: message, type: 'success', alertClass: 'alert-success', heading: '<i class="glyphicon glyphicon-ok-sign"></i> Success'});
+                    angular.extend(messageObject, {message: message, type: 'success', alertClass: 'alert-success', heading: '<i class="glyphicon glyphicon-ok-sign"></i> Success'});
                     break;
                 case 'warning':
-                    $rootScope.flash.push({message: message, type: 'warning', alertClass: 'alert-warning', heading: '<i class="glyphicon glyphicon-warning-sign"></i> Warning'});
+                    angular.extend(messageObject, {message: message, type: 'warning', alertClass: 'alert-warning', heading: '<i class="glyphicon glyphicon-warning-sign"></i> Warning'});
                     break;
                 default:
-                    $rootScope.flash.push({message: message, type: 'info', alertClass: 'alert-info', heading: '<i class="glyphicon glyphicon-info-sign"></i> Info'});
+                    angular.extend(messageObject, {message: message, type: 'info', alertClass: 'alert-info', heading: '<i class="glyphicon glyphicon-info-sign"></i> Info'});
                     break;
             }
         },
-        remove: function(type) {
-            if(typeof type !== 'undefined')
-            {
-                angular.forEach($rootScope.flash, function(element, key){
-                    if(element.type == type) $rootScope.flash.splice(key, 1);
-                });
-            }
+        remove: function(index) {
+            $rootScope.flash.splice(index, 1);
         },
         clear: function() {
             delete $rootScope.flash;
@@ -121,18 +159,45 @@ app.controller('DashboardController', function($scope, $location, FlashService){
 
 });
 
-app.controller('MembersController', function($scope, $location, $routeParams, FlashService, Members){
+app.controller('MembersController', function($scope, $location, $routeParams, FlashService, MembersService, $modal, members, member){
     $scope.members = {};
-    if(!$.isEmptyObject(Members.data.data))
-        $scope.members.data = Members.data.data;
-    if(Members.data.meta)
-        $scope.members.pagination = Members.data.meta.pagination;
+    if(!$.isEmptyObject(members.data.data))
+        $scope.members.data = members.data.data;
+    if(members.data.meta)
+        $scope.members.pagination = members.data.meta.pagination;
+
+    if(member && !$.isEmptyObject(member.data.data))
+    {
+        var $modalInstance = $modal.open({
+            backdrop: 'static',
+            templateUrl: "../../templates/members/edit.html",
+            controller: function($scope) {
+                $scope.member = member.data.data;
+                $scope.save = function(){
+
+                    // Temporary remove some date fields until we make them editable
+                    delete $scope.member.dob;
+                    delete $scope.member.dos;
+                    delete $scope.member.doc;
+
+                    MembersService.edit($scope.member.id, $scope.member);
+                    FlashService.set('Member successfully saved!!', 'success');
+                    $location.path('members', $location.search());
+                    $modalInstance.dismiss();
+                };
+                $scope.cancel = function(){
+                    $location.path('members', $location.search());
+                    $modalInstance.dismiss();
+                }
+            }
+        });
+    }
 });
 
-app.controller('GroupsController', function($scope, $location, FlashService, Groups){
+app.controller('GroupsController', function($scope, $location, FlashService, groups){
     $scope.groups = {};
-    if(!$.isEmptyObject(Groups.data.data))
-        $scope.groups.data = Groups.data.data;
-    if(Groups.data.meta)
-        $scope.groups.pagination = Groups.data.meta.pagination;
+    if(!$.isEmptyObject(groups.data.data))
+        $scope.groups.data = groups.data.data;
+    if(groups.data.meta)
+        $scope.groups.pagination = groups.data.meta.pagination;
 });

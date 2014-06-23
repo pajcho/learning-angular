@@ -19,12 +19,12 @@
                     <td>{{ member.full_name }}</td>
                     <td>{{ member.phone }}</td>
                     <td>
-                        <i class="fa fa-circle" style="color: {{ member.active ? '#47A447' : '#ED9C28' }};"></i>
+                        <i class="fa fa-circle success" ng-class="{'text-success': member.active, 'text-warning': !member.active}"></i>
                         {{ member.active ? 'Active' : 'Inactive' }}
                     </td>
                     <td width="80">
-                        <button class="btn btn-xs btn-info"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                        <a class="btn btn-xs btn-info" href ng-click="$location.path('/members/' + member.id + '/edit', $location.search())"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
                 <tr ng-if="!members.data">
@@ -54,7 +54,5 @@
         </div>
     </div>
 </div>
-
-
 
 

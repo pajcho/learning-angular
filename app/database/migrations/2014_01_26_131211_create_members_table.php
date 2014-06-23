@@ -25,6 +25,7 @@ class CreateMembersTable extends Migration {
 			$table->dateTime('dos')->nullable()->default(NULL);
 			$table->dateTime('doc')->nullable()->default(NULL);
 			$table->unsignedInteger('active')->default(1);
+			$table->unsignedInteger('freeOfCharge')->default(0);
 
 			$table->timestamps();
 		});
