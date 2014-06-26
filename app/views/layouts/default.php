@@ -80,7 +80,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php echo asset("assets/js/jquery-1.11.0.min.js") ?>"><\/script>')</script>
         <script src="<?php echo asset('assets/js/bootstrap.js') ?>" type="text/javascript"></script>
-        <script src="<?php echo asset('assets/js/bootbox.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-route.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-animate.min.js') ?>" type="text/javascript"></script>
@@ -89,8 +88,15 @@
         <script src="<?php echo asset('assets/js/toastr.min.js') ?>" type="text/javascript"></script>
 
         <!-- Custom project scripts -->
-        <script src="<?php echo asset('assets/js/main.js') ?>" type="text/javascript"></script>
-        <script src="<?php echo asset('assets/js/app.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/app.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/filters.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/services/FlashService.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/services/MembersService.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/services/GroupsService.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/controllers/AppController.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/controllers/DashboardController.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/controllers/MembersController.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/controllers/GroupsController.js') ?>" type="text/javascript"></script>
         <script>
             angular.module("app").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
         </script>
