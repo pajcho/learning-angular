@@ -1,0 +1,24 @@
+<form ng-submit="save()" name="groupsEdit">
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa fa-pencil"></i> Edit group </h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{'has-error': !groupsEdit.name.$valid}">
+            <label for="name" class="control-label">Name</label>
+            <input type="text" name="name" ng-model="group.name" class="form-control" required/>
+        </div>
+        <div class="form-group" ng-class="{'has-error': !groupsEdit.location.$valid}">
+            <label for="location" class="control-label">Location</label>
+            <input type="text" name="location" ng-model="group.location" class="form-control" required/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <span ng-show="!groupsEdit.$valid" class="pull-left text-danger">
+            <i class="fa fa-warning"></i>
+            Check form for errors
+        </span>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+        <a class="btn btn-warning" ng-click="cancel()">Cancel</a>
+    </div>
+</form>

@@ -18,8 +18,8 @@
                     <td>{{ group.name }}</td>
                     <td>{{ group.location }}</td>
                     <td width="80">
-                        <button class="btn btn-xs btn-info"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                        <a class="btn btn-xs btn-info" href ng-click="$location.path('/members/groups/' + group.id + '/edit', $location.search())"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-xs" ng-class="{'btn-default': group.spin, 'btn-danger': !group.spin}" ng-click="delete(group, $index)"><i class="fa fa-trash-o" ng-class="{'fa-spinner fa-spin': group.spin}"></i></a>
                     </td>
                 </tr>
                 <tr ng-if="!groups.data">

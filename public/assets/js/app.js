@@ -24,20 +24,26 @@ app.config(function($routeProvider, $locationProvider){
         controller: 'DashboardController'
     });
 
-    $routeProvider.when('/members/groups', {
-        templateUrl: '../../templates/groups.html',
+    $routeProvider.when('/members/groups/:id?/:edit?', {
+        templateUrl: '../../templates/groups/groups.html',
         controller: 'GroupsController',
         resolve: {
             groups : function(GroupsService, $route) {
                 return GroupsService.get({
                     page: $route.current.params.page || 1
                 });
+            },
+            group : function(GroupsService, $route) {
+                if(!isNaN($route.current.params.id) && $route.current.params.edit == 'edit')
+                    return GroupsService.getOne($route.current.params.id);
+
+                return null;
             }
         }
     });
 
     $routeProvider.when('/members/:id?/:edit?', {
-        templateUrl: '../../templates/members.html',
+        templateUrl: '../../templates/members/members.html',
         controller: 'MembersController',
         resolve: {
             members : function(MembersService, $route) {
@@ -80,6 +86,9 @@ app.factory("MembersService", function($http, FlashService, $location) {
                 FlashService.set(error.message, 'error');
                 $location.path('/members', $location.search());
             });
+        },
+        delete: function(id){
+            return $http.delete('/api/members/' + id);
         }
     }
 });
@@ -90,6 +99,23 @@ app.factory("GroupsService", function($http) {
             return $http.get('/api/members/groups', {
                 params: params
             });
+        },
+        getOne: function(id, params){
+            return $http.get('/api/members/groups/' + id, {
+                params: params
+            }).error(function(error){
+                FlashService.set(error.message, 'error');
+                $location.path('/members/groups', $location.search());
+            });
+        },
+        edit: function(id, params){
+            return $http.put('/api/members/groups/' + id, params).error(function(error){
+                FlashService.set(error.message, 'error');
+                $location.path('/members/groups', $location.search());
+            });
+        },
+        delete: function(id){
+            return $http.delete('/api/members/groups/' + id);
         }
     }
 });
@@ -112,37 +138,12 @@ app.filter('range', function() {
 app.factory("FlashService", function($rootScope) {
     return $rootScope.FlashService = {
         set: function(message, type) {
-            if(typeof $rootScope.flash === 'undefined') $rootScope.flash = [];
-            angular.element("#flash-messages").removeClass('hidden');
-
-            var messageObject = $rootScope.flash.push({
-                remove: function(index){
-                    return $rootScope.FlashService.remove(index);
-                }
-            });
-            messageObject = $rootScope.flash[messageObject-1];
-
-            switch(type)
-            {
-                case 'error':
-                    angular.extend(messageObject, {message: message, type: 'error', alertClass: 'alert-danger', heading: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error'});
-                    break;
-                case 'success':
-                    angular.extend(messageObject, {message: message, type: 'success', alertClass: 'alert-success', heading: '<i class="glyphicon glyphicon-ok-sign"></i> Success'});
-                    break;
-                case 'warning':
-                    angular.extend(messageObject, {message: message, type: 'warning', alertClass: 'alert-warning', heading: '<i class="glyphicon glyphicon-warning-sign"></i> Warning'});
-                    break;
-                default:
-                    angular.extend(messageObject, {message: message, type: 'info', alertClass: 'alert-info', heading: '<i class="glyphicon glyphicon-info-sign"></i> Info'});
-                    break;
-            }
-        },
-        remove: function(index) {
-            $rootScope.flash.splice(index, 1);
+            if(typeof type === 'undefined') type = 'info';
+            toastr.options.closeButton = true;
+            toastr[type](message);
         },
         clear: function() {
-            delete $rootScope.flash;
+            toastr.clear();
         }
     }
 });
@@ -166,6 +167,19 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
     if(members.data.meta)
         $scope.members.pagination = members.data.meta.pagination;
 
+    // Delete member
+    $scope.delete = function(member, index){
+        $scope.members.data[index].spin = true;
+        MembersService.delete(member.id).success(function(){
+            FlashService.set('Member successfully deleted!!', 'success');
+            $scope.members.data.splice(index, 1);
+        }).error(function(response){
+            FlashService.set(response.message, 'error');
+            $scope.members.data[index].spin = false;
+        });
+    };
+
+    // Edit member form
     if(member && !$.isEmptyObject(member.data.data))
     {
         var $modalInstance = $modal.open({
@@ -194,10 +208,48 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
     }
 });
 
-app.controller('GroupsController', function($scope, $location, FlashService, groups){
+app.controller('GroupsController', function($scope, $location, $routeParams, FlashService, GroupsService, $modal, groups, group){
     $scope.groups = {};
     if(!$.isEmptyObject(groups.data.data))
         $scope.groups.data = groups.data.data;
     if(groups.data.meta)
         $scope.groups.pagination = groups.data.meta.pagination;
+
+    // Delete group
+    $scope.delete = function(group, index){
+        $scope.groups.data[index].spin = true;
+        GroupsService.delete(group.id).success(function(){
+            FlashService.set('Group successfully deleted!!', 'success');
+            $scope.groups.data.splice(index, 1);
+        }).error(function(response){
+            FlashService.set(response.message, 'error');
+            $scope.groups.data[index].spin = false;
+        });
+    };
+
+    // Edit group form
+    if(group && !$.isEmptyObject(group.data.data))
+    {
+        var $modalInstance = $modal.open({
+            backdrop: 'static',
+            templateUrl: "../../templates/groups/edit.html",
+            controller: function($scope) {
+                $scope.group = group.data.data;
+                $scope.save = function(){
+
+                    // Temporary remove some date fields until we make them editable
+                    delete $scope.group.training;
+
+                    GroupsService.edit($scope.group.id, $scope.group);
+                    FlashService.set('Group successfully saved!!', 'success');
+                    $location.path('members/groups', $location.search());
+                    $modalInstance.dismiss();
+                };
+                $scope.cancel = function(){
+                    $location.path('members/groups', $location.search());
+                    $modalInstance.dismiss();
+                }
+            }
+        });
+    }
 });

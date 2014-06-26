@@ -20,6 +20,7 @@
         <link href="<?php echo asset('assets/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo asset('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
         <link href="<?php echo asset('assets/css/loading-bar.css') ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo asset('assets/css/toastr.min.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo asset('assets/css/main.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
 
@@ -85,6 +86,7 @@
         <script src="<?php echo asset('assets/js/angular-animate.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/loading-bar.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/ui.bootstrap/ui-bootstrap-tpls-0.11.0.min.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/toastr.min.js') ?>" type="text/javascript"></script>
 
         <!-- Custom project scripts -->
         <script src="<?php echo asset('assets/js/main.js') ?>" type="text/javascript"></script>

@@ -1,6 +1,6 @@
 <form ng-submit="save()" name="membersEdit">
     <div class="modal-header">
-        <h3 class="modal-title"><i class="fa fa-pencil"></i> Edit member</h3>
+        <h3 class="modal-title"><i class="fa fa-pencil"></i> Edit member </h3>
     </div>
     <div class="modal-body">
         <div class="form-group" ng-class="{'has-error': !membersEdit.first_name.$valid}">
@@ -18,14 +18,22 @@
         <hr/>
         <div class="btn-group pull-left">
             <!--style="color: #{{ member.active ? '47A447' : 'ED9C28' }};"-->
-            <label class="btn btn-default"><i class="fa fa-circle" ng-class="{'text-success': member.active, 'text-warning': !member.active}"></i> Active</label>
-            <label class="btn btn-success" ng-class="{bold: member.active}" ng-model="member.active" btn-radio="1" uncheckable>Yes</label>
-            <label class="btn btn-warning" ng-class="{bold: !member.active}" ng-model="member.active" btn-radio="0" uncheckable>No</label>
+            <label class="btn btn-default">Active</label>
+            <label class="btn btn-success" ng-class="{bold: member.active}" ng-model="member.active" btn-radio="1" uncheckable>
+                <i ng-class="{'fa fa-check-circle-o': member.active, 'fa fa-circle-o': !member.active}"></i> Yes
+            </label>
+            <label class="btn btn-warning" ng-class="{bold: !member.active}" ng-model="member.active" btn-radio="0" uncheckable>
+                <i ng-class="{'fa fa-circle-o': member.active, 'fa fa-check-circle-o': !member.active}"></i> No
+            </label>
         </div>
         <div class="btn-group pull-right">
-            <label class="btn btn-default"><i class="fa fa-circle" ng-class="{'text-success': member.freeOfCharge, 'text-warning': !member.freeOfCharge}"></i> Free of charge</label>
-            <label class="btn btn-success" ng-class="{bold: member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="1" uncheckable>Yes</label>
-            <label class="btn btn-warning" ng-class="{bold: !member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="0" uncheckable>No</label>
+            <label class="btn btn-default">Free of charge</label>
+            <label class="btn btn-success" ng-class="{bold: member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="1" uncheckable>
+                <i ng-class="{'fa fa-check-circle-o': member.freeOfCharge, 'fa fa-circle-o': !member.freeOfCharge}"></i> Yes
+            </label>
+            <label class="btn btn-warning" ng-class="{bold: !member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="0" uncheckable>
+                <i ng-class="{'fa fa-circle-o': member.freeOfCharge, 'fa fa-check-circle-o': !member.freeOfCharge}"></i> No
+            </label>
         </div>
         <div class="clearfix"></div>
     </div>

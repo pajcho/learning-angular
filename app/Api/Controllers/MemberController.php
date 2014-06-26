@@ -4,6 +4,7 @@ use App\Models\Member;
 use Dingo\Api\Exception\DeleteResourceFailedException;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\UpdateResourceFailedException;
+use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -52,7 +53,7 @@ class MemberController extends ApiController {
         catch(Exception $e)
         {
             // validation failed
-            throw new StoreResourceFailedException('Could not create new member.', $e->getMessage());
+            throw new StoreResourceFailedException('Could not create new member.');
         }
 
     }
@@ -102,7 +103,7 @@ class MemberController extends ApiController {
         catch(Exception $e)
         {
             // validation failed
-            throw new UpdateResourceFailedException('Could not update member.', $e->getMessage());
+            throw new UpdateResourceFailedException('Could not update member.');
         }
     }
 
@@ -128,7 +129,7 @@ class MemberController extends ApiController {
         catch(Exception $e)
         {
             // validation failed
-            throw new DeleteResourceFailedException('Could not delete member.', $e->getMessage());
+            throw new DeleteResourceFailedException('Could not delete member.');
         }
     }
 

@@ -24,7 +24,7 @@
                     </td>
                     <td width="80">
                         <a class="btn btn-xs btn-info" href ng-click="$location.path('/members/' + member.id + '/edit', $location.search())"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
+                        <a class="btn btn-xs" ng-class="{'btn-default': member.spin, 'btn-danger': !member.spin}" ng-click="delete(member, $index)"><i class="fa fa-trash-o" ng-class="{'fa-spinner fa-spin': member.spin}"></i></a>
                     </td>
                 </tr>
                 <tr ng-if="!members.data">
