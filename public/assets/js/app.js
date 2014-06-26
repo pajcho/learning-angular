@@ -35,7 +35,12 @@ app.config(function($routeProvider, $locationProvider){
             },
             group : function(GroupsService, $route) {
                 if(!isNaN($route.current.params.id) && $route.current.params.edit == 'edit')
-                    return GroupsService.getOne($route.current.params.id);
+                {
+                    return GroupsService.getOne($route.current.params.id).error(function(error){
+                        FlashService.set(error.message, 'error');
+                        $location.path('/members/groups', $location.search());
+                    });
+                }
 
                 return null;
             }
@@ -51,9 +56,14 @@ app.config(function($routeProvider, $locationProvider){
                     page: $route.current.params.page || 1
                 });
             },
-            member : function(MembersService, $route) {
+            member : function(MembersService, $route, $location) {
                 if(!isNaN($route.current.params.id) && $route.current.params.edit == 'edit')
-                    return MembersService.getOne($route.current.params.id);
+                {
+                    return MembersService.getOne($route.current.params.id).error(function(error){
+                        FlashService.set(error.message, 'error');
+                        $location.path('/members', $location.search());
+                    });
+                }
 
                 return null;
             }
@@ -76,16 +86,10 @@ app.factory("MembersService", function($http, FlashService, $location) {
         getOne: function(id, params){
             return $http.get('/api/members/' + id, {
                 params: params
-            }).error(function(error){
-                FlashService.set(error.message, 'error');
-                $location.path('/members', $location.search());
             });
         },
         edit: function(id, params){
-            return $http.put('/api/members/' + id, params).error(function(error){
-                FlashService.set(error.message, 'error');
-                $location.path('/members', $location.search());
-            });
+            return $http.put('/api/members/' + id, params);
         },
         delete: function(id){
             return $http.delete('/api/members/' + id);
@@ -103,16 +107,10 @@ app.factory("GroupsService", function($http) {
         getOne: function(id, params){
             return $http.get('/api/members/groups/' + id, {
                 params: params
-            }).error(function(error){
-                FlashService.set(error.message, 'error');
-                $location.path('/members/groups', $location.search());
             });
         },
         edit: function(id, params){
-            return $http.put('/api/members/groups/' + id, params).error(function(error){
-                FlashService.set(error.message, 'error');
-                $location.path('/members/groups', $location.search());
-            });
+            return $http.put('/api/members/groups/' + id, params);
         },
         delete: function(id){
             return $http.delete('/api/members/groups/' + id);
@@ -179,6 +177,20 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
         });
     };
 
+    // Activate/Deactivate member
+    $scope.toggleActive = function(member, index){
+        $scope.members.data[index].spinActive = true;
+
+        MembersService.edit(member.id, {'active': (member.active ? 0 : 1)}).success(function(){
+            $scope.members.data[index].spinActive = false;
+            FlashService.set('Member successfully ' + (member.active ? 'deactivated' : 'activated') + '!!', 'success');
+            $scope.members.data[index].active = member.active ? 0 : 1;
+        }).error(function(error){
+            $scope.members.data[index].spinActive = false;
+            FlashService.set(error.message, 'error');
+        });
+    };
+
     // Edit member form
     if(member && !$.isEmptyObject(member.data.data))
     {
@@ -194,7 +206,10 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
                     delete $scope.member.dos;
                     delete $scope.member.doc;
 
-                    MembersService.edit($scope.member.id, $scope.member);
+                    MembersService.edit($scope.member.id, $scope.member).error(function(error){
+                        FlashService.set(error.message, 'error');
+                        $location.path('/members', $location.search());
+                    });
                     FlashService.set('Member successfully saved!!', 'success');
                     $location.path('members', $location.search());
                     $modalInstance.dismiss();
@@ -240,7 +255,10 @@ app.controller('GroupsController', function($scope, $location, $routeParams, Fla
                     // Temporary remove some date fields until we make them editable
                     delete $scope.group.training;
 
-                    GroupsService.edit($scope.group.id, $scope.group);
+                    GroupsService.edit($scope.group.id, $scope.group).error(function(error){
+                        FlashService.set(error.message, 'error');
+                        $location.path('/members/groups', $location.search());
+                    });
                     FlashService.set('Group successfully saved!!', 'success');
                     $location.path('members/groups', $location.search());
                     $modalInstance.dismiss();

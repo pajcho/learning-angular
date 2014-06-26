@@ -53,7 +53,7 @@ class MemberController extends ApiController {
         catch(Exception $e)
         {
             // validation failed
-            throw new StoreResourceFailedException('Could not create new member.');
+            throw new StoreResourceFailedException('Could not create new member.', $e->getMessage());
         }
 
     }

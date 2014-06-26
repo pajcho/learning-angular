@@ -19,8 +19,10 @@
                     <td>{{ member.full_name }}</td>
                     <td>{{ member.phone }}</td>
                     <td>
-                        <i class="fa fa-circle success" ng-class="{'text-success': member.active, 'text-warning': !member.active}"></i>
-                        {{ member.active ? 'Active' : 'Inactive' }}
+                        <span ng-click="toggleActive(member, $index)" class="btn btn-xs btn-default">
+                            <i ng-class="{'text-success': member.active, 'text-warning': !member.active, 'fa fa-spinner fa-spin': member.spinActive, 'fa fa-circle': !member.spinActive}"></i>
+                            {{ member.active ? 'Active' : 'Inactive' }}
+                        </span>
                     </td>
                     <td width="80">
                         <a class="btn btn-xs btn-info" href ng-click="$location.path('/members/' + member.id + '/edit', $location.search())"><i class="fa fa-edit"></i></a>
