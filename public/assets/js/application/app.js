@@ -13,7 +13,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     );
 }]);
 
-var app = angular.module('app', ['angular-loading-bar', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
+var app = angular.module('app', ['angular-loading-bar', 'ngAnimate', 'ui.bootstrap', 'ui.select2', 'ngRoute']);
 
 app.config(function($routeProvider, $locationProvider){
 
@@ -62,6 +62,16 @@ app.config(function($routeProvider, $locationProvider){
                     return MembersService.getOne($route.current.params.id).error(function(error){
                         FlashService.set(error.message, 'error');
                         $location.path('/members', $location.search());
+                    });
+                }
+
+                return null;
+            },
+            groups : function(GroupsService, $route) {
+                if(!isNaN($route.current.params.id) && $route.current.params.edit == 'edit')
+                {
+                    return GroupsService.get({
+                        page: false
                     });
                 }
 

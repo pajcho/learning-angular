@@ -1,9 +1,22 @@
-app.controller('MembersController', function($scope, $location, $routeParams, FlashService, MembersService, $modal, members, member){
+app.controller('MembersController', function($scope, $location, $routeParams, FlashService, DateService, MembersService, GroupsService, $modal, members, member, groups){
     $scope.members = {};
     if(!$.isEmptyObject(members.data.data))
         $scope.members.data = members.data.data;
     if(members.data.meta)
         $scope.members.pagination = members.data.meta.pagination;
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+    };
 
     // Delete member
     $scope.delete = function(member, index){
@@ -36,16 +49,17 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
     {
         var $modalInstance = $modal.open({
             backdrop: 'static',
+            size: 'lg',
             templateUrl: "../../templates/members/edit.html",
             controller: function($scope) {
+                $scope.groups = groups.data.data;
+
                 $scope.member = member.data.data;
+                $scope.member.dob = DateService.forDatepicker($scope.member.dob);
+                $scope.member.dos = DateService.forDatepicker($scope.member.dos);
+                $scope.member.doc = DateService.forDatepicker($scope.member.doc);
+
                 $scope.save = function(){
-
-                    // Temporary remove some date fields until we make them editable
-                    delete $scope.member.dob;
-                    delete $scope.member.dos;
-                    delete $scope.member.doc;
-
                     MembersService.edit($scope.member.id, $scope.member).error(function(error){
                         FlashService.set(error.message, 'error');
                         $location.path('/members', $location.search());
@@ -61,4 +75,42 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
             }
         });
     }
+});
+
+app.controller('DatepickerCtrl', function ($scope) {
+
+    $scope.format = 'dd.MM.yyyy';
+
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.toggleOpenDatePicker = function($event,datePicker) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[datePicker] = !$scope[datePicker];
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+    };
+
 });

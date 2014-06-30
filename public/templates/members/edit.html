@@ -2,40 +2,125 @@
     <div class="modal-header">
         <h3 class="modal-title"><i class="fa fa-pencil"></i> Edit member </h3>
     </div>
-    <div class="modal-body">
-        <div class="form-group" ng-class="{'has-error': !membersEdit.first_name.$valid}">
-            <label for="first_name" class="control-label">First Name</label>
-            <input type="text" name="first_name" ng-model="member.first_name" class="form-control" required/>
-        </div>
-        <div class="form-group" ng-class="{'has-error': !membersEdit.last_name.$valid}">
-            <label for="last_name" class="control-label">Last Name</label>
-            <input type="text" name="last_name" ng-model="member.last_name" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label for="phone" class="control-label">Phone</label>
-            <input type="text" name="phone" ng-model="member.phone" class="form-control"/>
-        </div>
-        <hr/>
-        <div class="btn-group pull-left">
-            <!--style="color: #{{ member.active ? '47A447' : 'ED9C28' }};"-->
-            <label class="btn btn-default">Active</label>
-            <label class="btn btn-success" ng-class="{bold: member.active}" ng-model="member.active" btn-radio="1" uncheckable>
-                <i ng-class="{'fa fa-check-circle-o': member.active, 'fa fa-circle-o': !member.active}"></i> Yes
-            </label>
-            <label class="btn btn-warning" ng-class="{bold: !member.active}" ng-model="member.active" btn-radio="0" uncheckable>
-                <i ng-class="{'fa fa-circle-o': member.active, 'fa fa-check-circle-o': !member.active}"></i> No
-            </label>
-        </div>
-        <div class="btn-group pull-right">
-            <label class="btn btn-default">Free of charge</label>
-            <label class="btn btn-success" ng-class="{bold: member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="1" uncheckable>
-                <i ng-class="{'fa fa-check-circle-o': member.freeOfCharge, 'fa fa-circle-o': !member.freeOfCharge}"></i> Yes
-            </label>
-            <label class="btn btn-warning" ng-class="{bold: !member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="0" uncheckable>
-                <i ng-class="{'fa fa-circle-o': member.freeOfCharge, 'fa fa-check-circle-o': !member.freeOfCharge}"></i> No
-            </label>
-        </div>
-        <div class="clearfix"></div>
+
+    <div class="modal-body" ng-controller="DatepickerCtrl">
+        <tabset>
+            <tab heading="Details">
+                <div style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{'has-error': !membersEdit.first_name.$valid}">
+                                <label for="first_name" class="control-label">First Name</label>
+                                <input type="text" name="first_name" ng-model="member.first_name" class="form-control" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{'has-error': !membersEdit.last_name.$valid}">
+                                <label for="last_name" class="control-label">Last Name</label>
+                                <input type="text" name="last_name" ng-model="member.last_name" class="form-control" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="group" class="control-label">Group</label>
+                                <select ui-select2 ng-model="member.group_id" data-placeholder="Select member group..." class="form-control">
+                                    <option value=""></option>
+                                    <option ng-repeat="group in groups" value="{{group.id}}">{{group.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Active</label>
+                                <div class="input-group">
+                                    <div class="btn-group">
+                                        <label class="btn btn-success" ng-class="{bold: member.active}" ng-model="member.active" btn-radio="1" uncheckable>
+                                            <i ng-class="{'fa fa-check-circle-o': member.active, 'fa fa-circle-o': !member.active}"></i> Yes
+                                        </label>
+                                        <label class="btn btn-warning" ng-class="{bold: !member.active}" ng-model="member.active" btn-radio="0" uncheckable>
+                                            <i ng-class="{'fa fa-circle-o': member.active, 'fa fa-check-circle-o': !member.active}"></i> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Free of charge</label>
+                                <div class="input-group">
+                                    <div class="btn-group">
+                                        <label class="btn btn-success" ng-class="{bold: member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="1" uncheckable>
+                                            <i ng-class="{'fa fa-check-circle-o': member.freeOfCharge, 'fa fa-circle-o': !member.freeOfCharge}"></i> Yes
+                                        </label>
+                                        <label class="btn btn-warning" ng-class="{bold: !member.freeOfCharge}" ng-model="member.freeOfCharge" btn-radio="0" uncheckable>
+                                            <i ng-class="{'fa fa-circle-o': member.freeOfCharge, 'fa fa-check-circle-o': !member.freeOfCharge}"></i> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone" class="control-label">Phone</label>
+                                <input type="text" name="phone" ng-model="member.phone" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone" class="control-label">Unique Identifier</label>
+                                <input type="text" name="phone" ng-model="member.uid" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dos" class="control-label">Date of Birth</label>
+                                <p class="input-group">
+                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.dob" is-open="dob" close-text="Close" />
+                                    <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'dob')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dos" class="control-label">Date of Subscription</label>
+                                <p class="input-group">
+                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" min-date="member.dob" ng-model="member.dos" is-open="dos" close-text="Close" />
+                                    <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'dos')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </tab>
+            <tab heading="Additional info">
+                <div style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="doc" class="control-label">Medical Examination</label>
+                        <p class="input-group">
+                            <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.doc" is-open="doc" close-text="Close" />
+                            <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'doc')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes" class="control-label">Notes</label>
+                        <textarea ng-model="member.notes" class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
     </div>
     <div class="modal-footer">
         <span ng-show="!membersEdit.$valid" class="pull-left text-danger">

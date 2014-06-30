@@ -21,6 +21,8 @@
         <link href="<?php echo asset('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
         <link href="<?php echo asset('assets/css/loading-bar.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo asset('assets/css/toastr.min.css') ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo asset('assets/vendor/select2/select2.css') ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo asset('assets/vendor/select2/select2-bootstrap.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo asset('assets/css/main.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
 
@@ -80,16 +82,20 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php echo asset("assets/js/jquery-1.11.0.min.js") ?>"><\/script>')</script>
         <script src="<?php echo asset('assets/js/bootstrap.js') ?>" type="text/javascript"></script>
-        <script src="<?php echo asset('assets/js/angular.min.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/angular.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-route.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/angular-animate.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/loading-bar.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/ui.bootstrap/ui-bootstrap-tpls-0.11.0.min.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/toastr.min.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/moment-with-langs.min.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/vendor/select2/select2.min.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/vendor/ui.select2/select2.js') ?>" type="text/javascript"></script>
 
         <!-- Custom project scripts -->
         <script src="<?php echo asset('assets/js/application/app.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/filters.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/services/DateService.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/services/FlashService.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/services/MembersService.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/services/GroupsService.js') ?>" type="text/javascript"></script>
