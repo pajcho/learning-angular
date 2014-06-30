@@ -100,6 +100,7 @@
         <script src="<?php echo asset('assets/js/application/services/MembersService.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/services/GroupsService.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/controllers/AppController.js') ?>" type="text/javascript"></script>
+        <script src="<?php echo asset('assets/js/application/controllers/DatepickerController.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/controllers/DashboardController.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/controllers/MembersController.js') ?>" type="text/javascript"></script>
         <script src="<?php echo asset('assets/js/application/controllers/GroupsController.js') ?>" type="text/javascript"></script>
