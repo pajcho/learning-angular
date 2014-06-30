@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'learning_laravel',
+			'database'  => 'learning_angular',
 			'username'  => 'forge',
 			'password'  => 'z2joqCeAZm6tTh5VZEf1',
 			'charset'   => 'utf8',
