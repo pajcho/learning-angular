@@ -5,19 +5,6 @@ app.controller('MembersController', function($scope, $location, $routeParams, Fl
     if(members.data.meta)
         $scope.members.pagination = members.data.meta.pagination;
 
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.opened = true;
-    };
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1,
-        showWeeks: false
-    };
-
     // Delete member
     $scope.delete = function(member, index){
         $scope.members.data[index].spin = true;

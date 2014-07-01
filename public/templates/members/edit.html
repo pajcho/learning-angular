@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label for="dos" class="control-label">Date of Birth</label>
                                 <p class="input-group">
-                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.dob" is-open="dob" close-text="Close" />
+                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.dob" is-open="datePicker.dob" close-text="Close" />
                                     <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'dob')">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label for="dos" class="control-label">Date of Subscription</label>
                                 <p class="input-group">
-                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" min-date="member.dob" ng-model="member.dos" is-open="dos" close-text="Close" />
+                                    <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" min-date="member.dob" ng-model="member.dos" is-open="datePicker.dos" close-text="Close" />
                                     <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'dos')">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -108,7 +108,7 @@
                     <div class="form-group">
                         <label for="doc" class="control-label">Medical Examination</label>
                         <p class="input-group">
-                            <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.doc" is-open="doc" close-text="Close" />
+                            <input class="form-control" type="text" datepicker-options="dateOptions" datepicker-popup="{{format}}" ng-model="member.doc" is-open="datePicker.doc" close-text="Close" />
                             <span class="input-group-addon" ng-click="toggleOpenDatePicker($event, 'doc')">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </span>

@@ -1,5 +1,6 @@
-app.controller('DatepickerCtrl', function ($scope) {
+app.controller('DatepickerCtrl', function ($scope, $timeout) {
 
+    $scope.datePicker = {};
     $scope.format = 'dd.MM.yyyy';
 
     $scope.today = function() {
@@ -21,15 +22,17 @@ app.controller('DatepickerCtrl', function ($scope) {
     };
     $scope.toggleMin();
 
-    $scope.toggleOpenDatePicker = function($event,datePicker) {
+    $scope.toggleOpenDatePicker = function($event, datePicker) {
         $event.preventDefault();
         $event.stopPropagation();
 
-        $scope[datePicker] = !$scope[datePicker];
+        $timeout( function(){
+            $scope.datePicker[datePicker] = !$scope.datePicker[datePicker];
+        }, 50);
     };
 
     $scope.dateOptions = {
-        formatYear: 'yy',
+        formatYear: 'yyyy',
         startingDay: 1,
         showWeeks: false
     };
