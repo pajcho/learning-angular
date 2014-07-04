@@ -1,6 +1,5 @@
 <?php namespace Api;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
 class ApiServiceProvider extends ServiceProvider {
