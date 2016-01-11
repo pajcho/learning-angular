@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'learning_angular',
-			'username'  => 'forge',
-			'password'  => 'z2joqCeAZm6tTh5VZEf1',
+			'host'      => $_ENV['DB_HOST'],
+			'database'  => $_ENV['DB_DATABASE'],
+			'username'  => $_ENV['DB_USERNAME'],
+			'password'  => $_ENV['DB_PASSWORD'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
