@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => env('APP_DEBUG', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => env('APP_TIMEZONE', 'UTC'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return array(
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => env('APP_LOCALE', 'en'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => '4sqhXQW4uiHqk84wFzOaksuMLwtvUZTj',
+	'key' => env('APP_KEY', '4sqhXQW4uiHqk84wFzOaksuMLwtvUZTj'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
